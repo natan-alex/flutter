@@ -1,1 +1,2 @@
-Codes in flutter to test and learn the framework
+# todo_app
+Simple todo app
