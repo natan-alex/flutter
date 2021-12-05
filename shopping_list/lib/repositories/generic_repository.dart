@@ -17,7 +17,11 @@ class GenericRepository<TModel extends Storable<TKey>, TKey> {
     return items.firstWhere((element) => element.getPrimaryKey() == id);
   }
 
-  void removeItemById(TKey id) {
+  List<TModel> getAllItems() {
+    return items;
+  }
+
+  void deleteItemById(TKey id) {
     items.removeWhere((element) => element.getPrimaryKey() == id);
   }
 
