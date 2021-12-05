@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_list/controllers/product_controller.dart';
 import 'package:shopping_list/repositories/generic_repository.dart';
 
 import 'models/product.dart';
@@ -22,11 +23,14 @@ void test() {
   genericRepo.addItem(product);
   genericRepo.addItem(product2);
   genericRepo.showItems();
-  genericRepo.removeItemById(product2.id);
+  genericRepo.deleteItemById(product2.id);
   genericRepo.showItems();
   var updatedProduct = Product(name: 'name', description: 'description');
   updatedProduct.id = product.id;
   genericRepo.updateItem(updatedProduct);
   genericRepo.showItems();
   print(genericRepo.getItemById(product.id).toJsonMap().toString());
+  var controller = ProductController();
+  controller.addNewProduct(product);
+  print(controller.getAllProducts());
 }
