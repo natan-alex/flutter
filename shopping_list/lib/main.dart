@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shopping_list/controllers/product_controller.dart';
 import 'package:shopping_list/repositories/generic_repository.dart';
+import 'package:shopping_list/views/create_product_view.dart';
+import 'package:shopping_list/views/product_list_view.dart';
 
 import 'models/product.dart';
 
 void main() {
   test();
 
-  runApp(MaterialApp(
-    home: Scaffold(
-        appBar: AppBar(title: const Text('List de compras')), body: Column()),
-    debugShowCheckedModeBanner: false,
-  ));
+  runApp(Provider<ProductController>(
+      create: (_) => ProductController(),
+      child: MaterialApp(
+        home: Scaffold(
+          appBar: AppBar(title: const Text('List de compras')),
+          body: Column(
+            children: [CreateProductView(), ProductListView()],
+          ),
+        ),
+        debugShowCheckedModeBanner: false,
+      )));
 }
 
 void test() {
@@ -32,5 +41,5 @@ void test() {
   print(genericRepo.getItemById(product.id).toJsonMap().toString());
   var controller = ProductController();
   controller.addNewProduct(product);
-  print(controller.getAllProducts());
+  print(controller.products);
 }
