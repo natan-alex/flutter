@@ -11,12 +11,13 @@ class Product extends Storable<int> {
       required this.description,
       this.wasAlreadyBought = false});
 
-  @override
-  void fromJsonMap(Map<String, dynamic> jsonMap) {
-    id = jsonMap['id'];
-    name = jsonMap['name'];
-    description = jsonMap['description'];
-    wasAlreadyBought = jsonMap['wasAlreadyBought'];
+  static Product fromJsonMap(Map<String, dynamic> jsonMap) {
+    var product = Product(
+        name: jsonMap['name'],
+        description: jsonMap['description'],
+        wasAlreadyBought: jsonMap['wasAlreadyBought']);
+    product = jsonMap['id'];
+    return product;
   }
 
   @override
