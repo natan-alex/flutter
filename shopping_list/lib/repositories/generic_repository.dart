@@ -1,39 +1,39 @@
 import 'package:shopping_list/interfaces/storable.dart';
 
 class GenericRepository<TModel extends Storable<TKey>, TKey> {
-  List<TModel> items = List.empty(growable: true);
+  final List<TModel> _items = List.empty(growable: true);
 
   showItems() {
-    for (TModel item in items) {
+    for (TModel item in _items) {
       print(item.toJsonMap().toString());
     }
   }
 
   void addItem(TModel newItem) {
-    items.add(newItem);
+    _items.add(newItem);
   }
 
   TModel getItemById(TKey id) {
-    return items.firstWhere((element) => element.getPrimaryKey() == id);
+    return _items.firstWhere((element) => element.getPrimaryKey() == id);
   }
 
   List<TModel> getAllItems() {
-    return items;
+    return _items;
   }
 
   void deleteItemById(TKey id) {
-    items.removeWhere((element) => element.getPrimaryKey() == id);
+    _items.removeWhere((element) => element.getPrimaryKey() == id);
   }
 
   bool updateItem(TModel updatedItem) {
-    int itemIndex = items.indexWhere(
+    int itemIndex = _items.indexWhere(
         (element) => element.getPrimaryKey() == updatedItem.getPrimaryKey());
 
     if (itemIndex == -1) {
       return false;
     }
 
-    items[itemIndex] = updatedItem;
+    _items[itemIndex] = updatedItem;
 
     return true;
   }
