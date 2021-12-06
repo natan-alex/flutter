@@ -14,11 +14,12 @@ void main() {
       create: (_) => ProductController(),
       child: MaterialApp(
         home: Scaffold(
-          appBar: AppBar(title: const Text('List de compras')),
-          body: Column(
-            children: [CreateProductView(), ProductListView()],
-          ),
-        ),
+            appBar: AppBar(title: const Text('List de compras')),
+            body: SingleChildScrollView(
+              child: Column(
+                children: [CreateProductView(), ProductListView()],
+              ),
+            )),
         debugShowCheckedModeBanner: false,
       )));
 }
