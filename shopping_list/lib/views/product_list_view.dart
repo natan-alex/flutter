@@ -13,15 +13,31 @@ class _ProductListViewState extends State<ProductListView> {
   Widget build(BuildContext context) {
     var controller = Provider.of<ProductController>(context);
 
-    return Observer(
-        builder: (_) => Expanded(
-            child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: controller.products.length,
-                itemBuilder: (_, index) {
-                  return ListTile(
-                    title: Text(controller.products[index].name),
-                  );
-                })));
+    return Column(children: [
+      PreferredSize(
+          preferredSize: const Size.fromHeight(2),
+          child: AppBar(
+            title: const Text(
+              "Produtos:",
+              style: TextStyle(fontSize: 15),
+            ),
+            centerTitle: true,
+            elevation: 0.0,
+          )),
+      Observer(
+          builder: (_) => controller.products.isNotEmpty
+              ? ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: controller.products.length,
+                  itemBuilder: (_, index) {
+                    final currentItem = controller.products[index];
+
+                    return ListTile(
+                      title: Text(currentItem.name),
+                      subtitle: Text(currentItem.description),
+                    );
+                  })
+              : const Text('Não há nenhum produto para ser exibido'))
+    ]);
   }
 }
