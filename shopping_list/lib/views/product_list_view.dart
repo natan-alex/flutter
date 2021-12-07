@@ -28,7 +28,7 @@ class _ProductListViewState extends State<ProductListView> {
               ? ListView.builder(
                   shrinkWrap: true,
                   itemCount: controller.products.length,
-                  itemBuilder: (_, index) => getExpansionTileWithProductInfos(
+                  itemBuilder: (_, index) => getListChildProductInfos(
                       controller.products[index], controller))
               : const Padding(
                   child: Text('Não há nenhum produto para ser exibido'),
@@ -37,8 +37,7 @@ class _ProductListViewState extends State<ProductListView> {
     ]);
   }
 
-  getExpansionTileWithProductInfos(
-      Product product, ProductController controller) {
+  getListChildProductInfos(Product product, ProductController controller) {
     return Padding(
         padding: const EdgeInsets.all(20),
         child: Column(children: [
