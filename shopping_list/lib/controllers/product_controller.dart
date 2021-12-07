@@ -13,14 +13,14 @@ abstract class AbstractProductController with Store {
   @readonly
   ObservableList<Product> _products = ObservableList<Product>();
 
-  final GenericRepository<Product, int> _repository =
-      GenericRepository<Product, int>();
+  final GenericRepository<Product, String> _repository =
+      GenericRepository<Product, String>();
 
   AbstractProductController() {
     _products = ObservableList.of(_repository.getAllItems());
   }
 
-  Product getProductById(int productId) {
+  Product getProductById(String productId) {
     return _repository.getItemById(productId);
   }
 
@@ -41,7 +41,7 @@ abstract class AbstractProductController with Store {
   }
 
   @action
-  void deleteProduct(int productId) {
+  void deleteProduct(String productId) {
     _repository.deleteItemById(productId);
     _products = ObservableList.of(_repository.getAllItems());
   }

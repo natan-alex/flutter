@@ -1,7 +1,6 @@
 import 'package:shopping_list/interfaces/storable.dart';
 
-class Product extends Storable<int> {
-  int id = 0;
+class Product extends Storable<String> {
   String name;
   String description;
   bool wasAlreadyBought;
@@ -16,7 +15,6 @@ class Product extends Storable<int> {
         name: jsonMap['name'],
         description: jsonMap['description'],
         wasAlreadyBought: jsonMap['wasAlreadyBought']);
-    product = jsonMap['id'];
     return product;
   }
 
@@ -24,7 +22,6 @@ class Product extends Storable<int> {
   Map<String, dynamic> toJsonMap() {
     var serializedProduct = <String, dynamic>{};
 
-    serializedProduct['id'] = id;
     serializedProduct['name'] = name;
     serializedProduct['description'] = description;
     serializedProduct['wasAlreadyBought'] = wasAlreadyBought;
@@ -33,7 +30,7 @@ class Product extends Storable<int> {
   }
 
   @override
-  int getPrimaryKey() {
-    return id;
+  String getPrimaryKey() {
+    return name;
   }
 }

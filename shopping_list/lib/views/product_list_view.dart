@@ -67,8 +67,7 @@ class _ProductListViewState extends State<ProductListView> {
                         value: product.wasAlreadyBought,
                         onChanged: (value) {
                           if (value != null) {
-                            product.wasAlreadyBought = value;
-                            controller.updateProduct(product);
+                            controller.deleteProduct(product.name);
                           }
                         })
                   ]))

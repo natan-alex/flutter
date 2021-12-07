@@ -26,20 +26,17 @@ void main() {
 
 void test() {
   var product = Product(name: 'test', description: 'test test');
-  product.id = 1;
   var product2 = Product(name: 't', description: 't');
-  product2.id = 2;
-  var genericRepo = GenericRepository<Product, int>();
+  var genericRepo = GenericRepository<Product, String>();
   genericRepo.addItem(product);
   genericRepo.addItem(product2);
   genericRepo.showItems();
-  genericRepo.deleteItemById(product2.id);
+  genericRepo.deleteItemById(product2.name);
   genericRepo.showItems();
   var updatedProduct = Product(name: 'name', description: 'description');
-  updatedProduct.id = product.id;
   genericRepo.updateItem(updatedProduct);
   genericRepo.showItems();
-  print(genericRepo.getItemById(product.id).toJsonMap().toString());
+  print(genericRepo.getItemById(product.name).toJsonMap().toString());
   var controller = ProductController();
   controller.addNewProduct(product);
   print(controller.products);
