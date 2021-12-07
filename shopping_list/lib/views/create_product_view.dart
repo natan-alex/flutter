@@ -21,6 +21,19 @@ class _CreateProductViewState extends State<CreateProductView> {
     return null;
   }
 
+  Padding createPaddingWithTextFormFieldInside(TextEditingController controller,
+      String placeholder, String onErrorMessage) {
+    return Padding(
+        padding: const EdgeInsets.only(top: 7, bottom: 7),
+        child: TextFormField(
+          decoration: InputDecoration(hintText: placeholder),
+          controller: controller,
+          validator: (value) {
+            nullOrEmptyValidator(value, onErrorMessage);
+          },
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
     var controller = Provider.of<ProductController>(context);
@@ -31,21 +44,10 @@ class _CreateProductViewState extends State<CreateProductView> {
           key: _formKey,
           child: Column(
             children: [
-              TextFormField(
-                decoration: const InputDecoration(hintText: 'Nome do produto'),
-                controller: _nameController,
-                validator: (value) {
-                  nullOrEmptyValidator(value, 'Nome do produto inválido.');
-                },
-              ),
-              TextFormField(
-                decoration:
-                    const InputDecoration(hintText: 'Descrição do produto'),
-                controller: _descriptionController,
-                validator: (value) {
-                  nullOrEmptyValidator(value, 'Descrição do produto inválida.');
-                },
-              ),
+              createPaddingWithTextFormFieldInside(_nameController,
+                  'Nome do produto', 'Nome do produto inválido'),
+              createPaddingWithTextFormFieldInside(_descriptionController,
+                  'Descrição do produto', 'Descrição do produto inválida'),
               ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState != null &&
